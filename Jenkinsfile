@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'python:3.13'
+        }
+    }
 
     environment {
         HF_USERNAME = "jenkins96"
@@ -17,9 +21,10 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                    apt install python3.13-venv
-                    python3.13 -m venv venv
-                    . venv/bin/activate
+                    python --version
+
+                    pip install --upgrade pip
+
                     pip install -r requirements.txt
                 '''
             }
@@ -28,7 +33,6 @@ pipeline {
         stage('Run Tests') {
             steps {
                 sh '''
-                    . venv/bin/activate
                     pytest
                 '''
             }
@@ -37,12 +41,8 @@ pipeline {
         stage('Deploy to Hugging Face') {
             steps {
                 withCredentials([
-                    string(
-                        credentialsId: 'hf-token',
-                        variable: 'HF_TOKEN'
-                    )
+                    string(credentialsId: 'hf-token', variable: 'HF_TOKEN')
                 ]) {
-
                     sh '''
                         git config --global user.email "jenkins@example.com"
                         git config --global user.name "Jenkins"
