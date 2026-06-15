@@ -1,8 +1,6 @@
 pipeline {
-    agent {
-        docker {
-            image 'python:3.13'
-        }
+   agent {
+        label 'linux'
     }
 
     environment {
