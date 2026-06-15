@@ -28,6 +28,10 @@ pipeline {
                         git remote add hf \
                         https://${HF_USERNAME}:${HF_TOKEN}@huggingface.co/spaces/${HF_USERNAME}/${HF_SPACE}
 
+                         git fetch hf
+
+                        git pull hf main --allow-unrelated-histories --no-edit
+
                         git push hf HEAD:main
                     '''
                 }
