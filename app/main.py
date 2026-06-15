@@ -8,6 +8,12 @@ def home():
         "message": "Hello from FastAPI"
     }
 
+@app.get("/status")
+def home():
+    return {
+        "message": "Running..."
+    }
+
 @app.get("/health")
 def health():
     return {
