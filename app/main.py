@@ -14,6 +14,7 @@ def home():
         "message": "Running..."
     }
 
+
 @app.get("/health")
 def health():
     return {
