@@ -28,7 +28,7 @@ pipeline {
                         git remote add hf \
                         https://${HF_USERNAME}:${HF_TOKEN}@huggingface.co/spaces/${HF_USERNAME}/${HF_SPACE}
 
-                        git push hf HEAD:main --force
+                        git push hf HEAD:main
                     '''
                 }
             }
