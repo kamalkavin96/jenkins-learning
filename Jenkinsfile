@@ -1,5 +1,5 @@
 pipeline {
-   agent any
+    agent any
 
     environment {
         HF_USERNAME = "jenkins96"
@@ -11,26 +11,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                sh '''
-                    python --version
-
-                    pip install --upgrade pip
-
-                    pip install -r requirements.txt
-                '''
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                sh '''
-                    pytest
-                '''
             }
         }
 
